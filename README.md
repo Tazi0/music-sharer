@@ -1,6 +1,6 @@
-# 🎵 Music Link Translator
+# 🎵 MusicBridge
 
-A web application that translates music links between different streaming platforms like Apple Music, Spotify, YouTube Music, and more.
+A web application that seamlessly converts music links between different streaming platforms like Apple Music, Spotify, YouTube Music, and more.
 
 ## Features
 

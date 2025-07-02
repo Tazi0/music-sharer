@@ -1,6 +1,7 @@
 <script lang="ts">
-	export let title = '🎵 Music Link Translator';
-	export let subtitle = 'Convert music links between Apple Music, Spotify, and YouTube Music';
+	export let title = '🎵 MusicBridge';
+	export let subtitle =
+		'Seamlessly convert music links between Apple Music, Spotify, YouTube Music, and more';
 </script>
 
 <div class="mb-8 pt-8 text-center">

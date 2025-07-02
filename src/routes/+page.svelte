@@ -1,4 +1,5 @@
 <script lang="ts">
+	import SEO from '$lib/components/SEO.svelte';
 	import Header from '$lib/components/Header.svelte';
 	import UrlInput from '$lib/components/UrlInput.svelte';
 	import TrackInfo from '$lib/components/TrackInfo.svelte';
@@ -55,6 +56,8 @@
 		inputUrl = url;
 	}
 </script>
+
+<SEO />
 
 <div class="min-h-screen bg-gradient-to-br from-purple-50 to-blue-50 p-4">
 	<div class="mx-auto max-w-4xl">
