@@ -1,22 +1,49 @@
-# sv
+# 🎵 Music Link Translator
 
-Everything you need to build a Svelte project, powered by [`sv`](https://github.com/sveltejs/cli).
+A web application that translates music links between different streaming platforms like Apple Music, Spotify, YouTube Music, and more.
 
-## Creating a project
+## Features
 
-If you're seeing this, you've probably already done this step. Congrats!
+- **Universal Link Translation**: Convert music links between Apple Music, Spotify, YouTube Music, and other supported platforms
+- **Real-time Translation**: Uses the SongLink/Odesli API for accurate, real-time link conversion
+- **Track Metadata**: Displays song title, artist, and album artwork when available
+- **Modern UI**: Clean, responsive interface built with SvelteKit and Tailwind CSS
+- **One-Click Actions**: Direct links to open tracks and copy URLs to clipboard
+
+## Supported Platforms
+
+- Apple Music
+- Spotify
+- YouTube Music
+- YouTube
+- SoundCloud
+- Tidal
+- Deezer
+- Amazon Music
+- Pandora
+
+## How to Use
+
+1. Copy a music link from any supported streaming platform
+2. Paste it into the input field on the website
+3. Click "Translate" to get equivalent links for other platforms
+4. Click the platform buttons to open the track or copy the link
+
+## Example
+
+Input: `https://music.apple.com/nl/album/fwu/1822359451`
+
+Output: Direct links to the same album/track on Spotify, YouTube Music, etc.
+
+## Development
+
+Install dependencies:
 
 ```bash
-# create a new project in the current directory
-npx sv create
-
-# create a new project in my-app
-npx sv create my-app
+npm install
 ```
 
-## Developing
-
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+Start the development server:
 
 ```bash
 npm run dev
@@ -27,12 +54,25 @@ npm run dev -- --open
 
 ## Building
 
-To create a production version of your app:
+To create a production version:
 
 ```bash
 npm run build
 ```
 
-You can preview the production build with `npm run preview`.
+Preview the production build:
 
-> To deploy your app, you may need to install an [adapter](https://svelte.dev/docs/kit/adapters) for your target environment.
+```bash
+npm run preview
+```
+
+## Technical Details
+
+- **Framework**: SvelteKit
+- **Styling**: Tailwind CSS
+- **API**: SongLink/Odesli for music link translation
+- **TypeScript**: Full type safety throughout
+
+## API Used
+
+This app uses the [SongLink/Odesli API](https://www.notion.so/API-d0ebe08a5e304a55928405eb682f6741) which provides free music link translation services across multiple platforms.
