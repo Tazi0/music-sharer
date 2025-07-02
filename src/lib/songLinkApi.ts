@@ -72,7 +72,7 @@ export async function translateMusicUrl(url: string): Promise<TranslatedLinks> {
 		const response = await fetch('/api/translate', {
 			method: 'POST',
 			headers: {
-				'Content-Type': 'application/json',
+				'Content-Type': 'application/json'
 			},
 			body: JSON.stringify({ url })
 		});
