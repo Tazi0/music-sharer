@@ -69,12 +69,17 @@ export interface TranslatedLinks {
  */
 export async function translateMusicUrl(url: string): Promise<TranslatedLinks> {
 	try {
-		const apiUrl = `https://api.song.link/v1-alpha.1/links?url=${encodeURIComponent(url)}`;
-
-		const response = await fetch(apiUrl);
+		const response = await fetch('/api/translate', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify({ url })
+		});
 
 		if (!response.ok) {
-			throw new Error(`API request failed: ${response.status}`);
+			const errorData = await response.json();
+			throw new Error(errorData.error || `API request failed: ${response.status}`);
 		}
 
 		const data: SongLinkResponse = await response.json();
