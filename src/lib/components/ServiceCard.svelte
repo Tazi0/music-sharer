@@ -1,42 +1,30 @@
 <script lang="ts">
-	export let service: 'apple' | 'spotify' | 'youtube';
+	import type { MusicService } from '$lib/services';
+
+	export let service: MusicService;
 	export let url: string;
 	export let isOriginal = false;
 
-	function getServiceIcon(service: string) {
-		switch (service) {
-			case 'apple':
-				return '🎵';
-			case 'spotify':
-				return '🎧';
-			case 'youtube':
-				return '📺';
-			default:
-				return '🎶';
-		}
+	function getServiceIcon(service: MusicService) {
+		return service.icon;
 	}
 
-	function getServiceName(service: string) {
-		switch (service) {
-			case 'apple':
-				return 'Apple Music';
-			case 'spotify':
-				return 'Spotify';
-			case 'youtube':
-				return 'YouTube Music';
-			default:
-				return 'Unknown';
-		}
+	function getServiceName(service: MusicService) {
+		return service.serviceName;
 	}
 
-	function getServiceColor(service: string) {
-		switch (service) {
+	function getServiceColor(service: MusicService) {
+		switch (service.serviceName.toLowerCase()) {
 			case 'apple':
+			case 'apple music':
 				return 'from-gray-800 to-black';
 			case 'spotify':
 				return 'from-green-500 to-green-600';
 			case 'youtube':
+			case 'youtube music':
 				return 'from-red-500 to-red-600';
+			case 'tidal':
+				return 'from-blue-500 to-blue-600';
 			default:
 				return 'from-purple-500 to-purple-600';
 		}

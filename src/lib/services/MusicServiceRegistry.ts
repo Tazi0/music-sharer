@@ -3,8 +3,9 @@ import { SpotifyService } from './SpotifyService.js';
 import { YouTubeMusicService } from './YouTubeMusicService.js';
 import { YouTubeService } from './YouTubeService.js';
 import type { MusicService } from './MusicService.js';
+import { TidalService } from './TidalService.js';
 
-// Import the SongLink response type
+// Import the SongLink response type and interfaces from songLinkApi
 interface SongLinkApiData {
 	entitiesByUniqueId?: {
 		[key: string]: {
@@ -18,14 +19,19 @@ interface SongLinkApiData {
 	};
 }
 
-interface TranslatedLinksResult {
+export interface ServiceWithUrl {
+	service: MusicService;
+	url: string;
+}
+
+export interface TranslatedLinks {
+	services: ServiceWithUrl[];
 	original: string;
 	metadata?: {
 		title?: string;
 		artist?: string;
 		thumbnail?: string;
 	};
-	[key: string]: string | object | undefined; // Allow dynamic properties
 }
 
 export class MusicServiceRegistry {
@@ -33,7 +39,8 @@ export class MusicServiceRegistry {
 		new AppleMusicService(),
 		new SpotifyService(),
 		new YouTubeMusicService(),
-		new YouTubeService()
+		new YouTubeService(),
+		new TidalService()
 	];
 
 	/**
@@ -81,36 +88,36 @@ export class MusicServiceRegistry {
 	/**
 	 * Build translated links from SongLink API response data
 	 */
-	buildTranslatedLinksFromApiData(
-		apiData: SongLinkApiData,
-		originalUrl: string
-	): TranslatedLinksResult {
-		const result: TranslatedLinksResult = {
-			original: originalUrl,
-			metadata: undefined
-		};
+	buildTranslatedLinksFromApiData(apiData: SongLinkApiData, originalUrl: string): TranslatedLinks {
+		const services: ServiceWithUrl[] = [];
 
 		// Extract metadata from the first entity
 		const firstEntity = Object.values(apiData.entitiesByUniqueId || {})[0];
-		if (firstEntity) {
-			result.metadata = {
-				title: firstEntity.title,
-				artist: firstEntity.artistName,
-				thumbnail: firstEntity.thumbnailUrl
-			};
-		}
+		const metadata = firstEntity
+			? {
+					title: firstEntity.title,
+					artist: firstEntity.artistName,
+					thumbnail: firstEntity.thumbnailUrl
+				}
+			: undefined;
 
 		// Extract platform links using service registry
 		for (const service of this.services) {
 			const platformData = apiData.linksByPlatform?.[service.platformKey];
 
 			if (platformData?.url) {
-				// Dynamically set the result property using the service's resultKey
-				(result as Record<string, unknown>)[service.resultKey] = platformData.url;
+				services.push({
+					service,
+					url: platformData.url
+				});
 			}
 		}
 
-		return result;
+		return {
+			services,
+			original: originalUrl,
+			metadata
+		};
 	}
 }
 

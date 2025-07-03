@@ -1,4 +1,5 @@
 import { musicServiceRegistry } from './services/index.js';
+import type { TranslatedLinks } from './services/MusicServiceRegistry.js';
 
 export interface SongLinkResponse {
 	entityUniqueId: string;
@@ -50,19 +51,6 @@ export interface SongLinkResponse {
 			apiProvider: string;
 			platforms: string[];
 		};
-	};
-}
-
-export interface TranslatedLinks {
-	apple?: string;
-	spotify?: string;
-	youtube?: string;
-	youtubeMusic?: string;
-	original: string;
-	metadata?: {
-		title?: string;
-		artist?: string;
-		thumbnail?: string;
 	};
 }
 

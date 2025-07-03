@@ -1,58 +1,36 @@
 <script lang="ts">
 	import ServiceCard from './ServiceCard.svelte';
 	import { getServiceFromUrl } from '$lib/songLinkApi.js';
-	import type { TranslatedLinks } from '$lib/songLinkApi.js';
+	import type { TranslatedLinks } from '$lib/services/MusicServiceRegistry';
 
 	export let translatedLinks: TranslatedLinks;
 
 	let serviceOfLink = getServiceFromUrl(translatedLinks.original);
 	let foundMatchingService = false;
-	let doesServiceMatch = (service: string) => {
-		let res = serviceOfLink === service;
+
+	function doesServiceMatch(serviceName: string): boolean {
+		let res = serviceOfLink === serviceName;
 		if (res) {
 			foundMatchingService = true;
 		}
-
 		return res;
-	};
+	}
 </script>
 
 <div class="rounded-xl bg-white p-6 shadow-lg">
 	<h2 class="mb-6 text-2xl font-semibold text-gray-800">Available on These Platforms</h2>
 
 	<div class="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-		{#if translatedLinks.apple}
+		{#each translatedLinks.services as serviceWithUrl}
 			<ServiceCard
-				service="apple"
-				url={translatedLinks.apple}
-				isOriginal={doesServiceMatch('Apple Music')}
+				service={serviceWithUrl.service}
+				url={serviceWithUrl.url}
+				isOriginal={doesServiceMatch(serviceWithUrl.service.serviceName)}
 			/>
-		{/if}
-
-		{#if translatedLinks.spotify}
-			<ServiceCard
-				service="spotify"
-				url={translatedLinks.spotify}
-				isOriginal={doesServiceMatch('Spotify')}
-			/>
-		{/if}
-
-		{#if translatedLinks.youtubeMusic}
-			<ServiceCard
-				service="youtube"
-				url={translatedLinks.youtubeMusic}
-				isOriginal={doesServiceMatch('YouTube Music')}
-			/>
-		{:else if translatedLinks.youtube}
-			<ServiceCard
-				service="youtube"
-				url={translatedLinks.youtube}
-				isOriginal={doesServiceMatch('YouTube') || doesServiceMatch('YouTube Music')}
-			/>
-		{/if}
+		{/each}
 	</div>
 
-	<!-- Show original if it doesn't match any of the above -->
+	<!-- Show original if it doesn't match any of the services -->
 	{#if foundMatchingService === false}
 		<div class="mt-4">
 			<h3 class="mb-3 text-lg font-medium text-gray-700">Original Link</h3>

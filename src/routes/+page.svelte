@@ -5,11 +5,8 @@
 	import TrackInfo from '$lib/components/TrackInfo.svelte';
 	import PlatformLinks from '$lib/components/PlatformLinks.svelte';
 	import ExampleUrls from '$lib/components/ExampleUrls.svelte';
-	import {
-		translateMusicUrl,
-		isSupportedMusicUrl,
-		type TranslatedLinks
-	} from '$lib/songLinkApi.js';
+	import { translateMusicUrl, isSupportedMusicUrl } from '$lib/songLinkApi.js';
+	import type { TranslatedLinks } from '$lib/services/MusicServiceRegistry';
 
 	let inputUrl = '';
 	let isLoading = false;
