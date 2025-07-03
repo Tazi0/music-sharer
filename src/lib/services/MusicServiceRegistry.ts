@@ -4,6 +4,7 @@ import { YouTubeMusicService } from './YouTubeMusicService.js';
 import { YouTubeService } from './YouTubeService.js';
 import type { MusicService } from './MusicService.js';
 import { TidalService } from './TidalService.js';
+import { DeezerService } from './DeezerService.js';
 
 // Import the SongLink response type and interfaces from songLinkApi
 interface SongLinkApiData {
@@ -40,7 +41,8 @@ export class MusicServiceRegistry {
 		new SpotifyService(),
 		new YouTubeMusicService(),
 		new YouTubeService(),
-		new TidalService()
+		new TidalService(),
+		new DeezerService()
 	];
 
 	/**

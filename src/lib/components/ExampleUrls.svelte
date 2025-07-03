@@ -32,5 +32,14 @@
 				https://music.youtube.com/watch?v=dQw4w9WgXcQ
 			</button>
 		</div>
+		<div>
+			<span class="font-medium">Deezer:</span>
+			<button
+				on:click={() => onExampleClick('https://www.deezer.com/track/3135556')}
+				class="ml-2 text-purple-600 underline hover:text-purple-800"
+			>
+				https://www.deezer.com/track/3135556
+			</button>
+		</div>
 	</div>
 </div>

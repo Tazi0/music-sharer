@@ -25,6 +25,8 @@
 				return 'from-red-500 to-red-600';
 			case 'tidal':
 				return 'from-blue-500 to-blue-600';
+			case 'deezer':
+				return 'from-orange-500 to-red-500';
 			default:
 				return 'from-purple-500 to-purple-600';
 		}
